@@ -1,0 +1,61 @@
+.imgur-gallery-plugin .caption {
+  color: #555;
+  font-size: 1.3rem;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+.imgur-gallery-plugin img {
+  max-width: 100%;
+  display: block;
+  border-radius: 15px;
+}
+.imgur-gallery-plugin .imgur-album {
+  width: 100%;
+  float: left;
+  margin-top: 25px;
+  margin-bottom: 35px;
+}
+.imgur-gallery-plugin .imgur-album .item-box {
+  width: 100%;
+  float: left;
+  position: relative;
+}
+.imgur-gallery-plugin .imgur-album .nsfw-message {
+  width: 100%;
+  background-color: #d65050;
+  color: #fff;
+  font-family: "Open Sans", serif;
+  font-size: 1.4rem;
+  padding: 15px;
+  float: left;
+  text-align: center;
+  line-height: 1.4;
+  cursor: pointer;
+  margin-bottom: 8px;
+  border-radius: 15px;
+}
+.imgur-gallery-plugin .imgur-album .item {
+  float: left;
+  padding: 10px;
+  width: 50%;
+}
+@media (min-width: 768px) {
+  .imgur-gallery-plugin .imgur-album .item {
+    width: 25%;
+  }
+}
+@media (min-width: 1060px) {
+  .imgur-gallery-plugin .imgur-album .item {
+    width: 20%;
+  }
+}
+.imgur-gallery-plugin .imgur-album .item a {
+  display: block;
+}
+.imgur-gallery-plugin .imgur-album .item a:after {
+  display: none;
+}
+.imgur-gallery-plugin .imgur-album .item img {
+  border-radius: 10px;
+}

@@ -3,7 +3,6 @@
     "title": "Imgur Gallery",
     "description": "Inject imgur albums as galleries.",
     "includes": [
-        "/imgur-gallery-plugin.js",
         "imgur.html"
     ],
     "fields": [

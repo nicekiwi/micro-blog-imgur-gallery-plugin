@@ -1,5 +1,14 @@
+{{ if not .Site.Params.custom_lightbox }}
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js" ></script>
+{{ end }}
+
+{{ if not .Site.Params.custom_stylesheets }}
+    <link type="text/css" rel="stylesheet" href="/imgur-gallery-plugin.css" />
+{{ end }}
+
 <script>
-    window.imgurPlugin = {
+    window.imgurGalleryPlugin = {
         api: {
             clientId: "{{ .Site.Params.imgur_client_id }}",
             url: "https://api.imgur.com/3/album/"
@@ -7,24 +16,5 @@
         customStylesheet: {{ .Site.Params.custom_stylesheets }},
         customLightbox: {{ .Site.Params.custom_lightbox }}
     };
-
-    if (!window.imgurPlugin.customStylesheet) {
-        let imgurCSS = document.createElement("link");
-        imgurCSS.type = "text/css";
-        imgurCSS.rel = "stylesheet";
-        imgurCSS.href = '/imgur-gallery-plugin.css';
-        document.head.appendChild(imgurCSS);
-    }
-
-    if (!window.imgurPlugin.custom_lightbox) {
-        let bagetteJs = document.createElement("script");
-        bagetteJs.src = 'https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js';
-        document.head.appendChild(bagetteJs);
-
-        let bagetteCSS = document.createElement("link");
-        bagetteCSS.type = "text/css";
-        bagetteCSS.rel = "stylesheet";
-        bagetteCSS.href = 'https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.css';
-        document.head.appendChild(bagetteCSS);
-    }
 </script>
+<script src="/imgur-gallery-plugin.js"></script>
