@@ -1,0 +1,36 @@
+<script>
+    window.imgurPlugin = {
+        api: {
+            clientId: "{{ .Site.Params.imgur_client_id }}",
+            url: "https://api.imgur.com/3/album/"
+        },
+        customStylesheet: {{ .Site.Params.custom_stylesheets }},
+        customLightbox: {{ .Site.Params.custom_lightbox }}
+    };
+
+    if (!window.imgurPlugin.customStylesheet) {
+        let link = document.createElement("link");
+
+        link.type = "text/css";
+        link.rel = "stylesheet";
+        link.href = 'static/app.css';
+
+        document.head.appendChild(link);
+    }
+
+    if (!window.imgurPlugin.custom_lightbox) {
+        let bagetteJs = document.createElement("script");
+        bagetteJs.href = 'https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js';
+        document.head.appendChild(bagetteJs);
+
+        let bagetteJs = document.createElement("link");
+        bagetteCSS.type = "text/css";
+        bagetteCSS.rel = "stylesheet";
+        bagetteCSS.href = 'https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.css';
+        document.head.appendChild(bagetteCSS);
+
+        let appJs = document.createElement("script");
+        appJs.href = 'static/app.js';
+        document.head.appendChild(appJs);
+    }
+</script>
