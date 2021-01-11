@@ -9,28 +9,22 @@
     };
 
     if (!window.imgurPlugin.customStylesheet) {
-        let link = document.createElement("link");
-
-        link.type = "text/css";
-        link.rel = "stylesheet";
-        link.href = 'static/app.css';
-
-        document.head.appendChild(link);
+        let imgurCSS = document.createElement("link");
+        imgurCSS.type = "text/css";
+        imgurCSS.rel = "stylesheet";
+        imgurCSS.href = '/imgur-gallery-plugin.css';
+        document.head.appendChild(imgurCSS);
     }
 
     if (!window.imgurPlugin.custom_lightbox) {
         let bagetteJs = document.createElement("script");
-        bagetteJs.href = 'https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js';
+        bagetteJs.src = 'https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js';
         document.head.appendChild(bagetteJs);
 
-        let bagetteJs = document.createElement("link");
+        let bagetteCSS = document.createElement("link");
         bagetteCSS.type = "text/css";
         bagetteCSS.rel = "stylesheet";
         bagetteCSS.href = 'https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.css';
         document.head.appendChild(bagetteCSS);
-
-        let appJs = document.createElement("script");
-        appJs.href = 'static/app.js';
-        document.head.appendChild(appJs);
     }
 </script>

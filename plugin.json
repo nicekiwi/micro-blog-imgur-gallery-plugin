@@ -3,25 +3,27 @@
     "title": "Imgur Gallery",
     "description": "Inject imgur albums as galleries.",
     "includes": [
-        "/app.js",
-        "/app.css",
-        "imagur.html"
+        "/imgur-gallery-plugin.js",
+        "imgur.html"
     ],
     "fields": [
         {
             "field": "params.imgur_client_id",
             "label": "Imgur Client ID",
-            "placeholder": ""
+            "placeholder": "",
+            "type": "string"
         },
         {
             "field": "params.custom_stylesheet",
             "label": "Use your own CSS?",
-            "placeholder": "false"
+            "placeholder": "false",
+            "type": "boolean"
         },
         {
             "field": "params.custom_lightbox",
             "label": "Use a custom Lightbox?",
-            "placeholder": "false"
+            "placeholder": "false",
+            "type": "boolean"
         }
     ]
 }

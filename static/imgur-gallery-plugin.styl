@@ -1,0 +1,98 @@
+.caption {
+    color: #555
+    font-size: 1.3rem
+    text-align: center
+    margin-top: 10px
+    margin-bottom: 0
+    font-family: heading-font
+  }
+
+  img {
+    max-width: 100%
+    //width: 120%
+    display: block
+    border-radius: 15px
+  }
+
+  .imgur-album {
+    width: 100%
+    float: left
+    margin-top: 25px
+    margin-bottom: 35px
+    // border-top: 1px dashed #ddd
+    // border-bottom: 1px dashed #ddd
+
+    // .title {
+    //   margin: 0 0 10px
+    //   font-size: 2.2rem
+    //   text-align: center
+    //   line-height: 1.1
+
+    //   small {
+    //     font-size: 60%
+    //     color: #777
+    //   }
+    // }
+
+    // .description {
+    //   margin: 0 0 15px
+    //   font-size: 1.3rem
+    //   text-align: center
+    //   line-height: 1.1
+    //   font-family: heading-font
+    //   color: #555
+    // }
+
+    .item-box {
+      width: 100%
+      float: left
+      position: relative
+    }
+
+    .nsfw-message {
+      width: 100%
+      background-color: rgb(214, 80, 80)
+      color: #fff
+      font-family: "Open Sans",serif
+      font-size: 1.4rem
+      padding: 15px
+      float: left
+      text-align: center
+      line-height: 1.4
+      cursor: pointer
+      margin-bottom: 8px
+      border-radius: 15px
+
+      h3 {
+        //margin: 0 0 10px
+        color: #fff
+      }
+    }
+
+    .item {
+      float: left
+      padding: 10px
+      width: 50%
+
+      +bp(tablet) {
+        width: 25%
+      }
+
+      +bp(desktop) {
+        width: 20%
+      }
+
+      a {
+        display: block
+
+        &:after {
+          display: none
+        }
+      }
+
+      img {
+        border-radius: 10px
+      }
+    }
+  }
+}
