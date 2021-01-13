@@ -13,6 +13,8 @@ Pulls in albums from Imgur on the fly via it's API and displays them as thumbnai
 - Supports custom lightbox
 - Supports custom CSS
 
+And best of all you can use multiple galleries on the same page.
+
 ### Requires a Imgur API Client ID
 Add your Imgur App Client ID into the plugin settings (not the secret).
 
