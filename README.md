@@ -56,8 +56,4 @@ data-nsfw-message="NFSW Content is hidden." // Specify a custom NSFW message
 data-nsfw-link="Click here to reveal content" // Specify custom link text to reveal the photos
 ```
 
-## Screenshot
-
-<img src="./screenshot.png" alt="Screenshot of Gallery" />
-
 Enjoy! :)
