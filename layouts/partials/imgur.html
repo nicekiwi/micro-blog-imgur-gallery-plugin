@@ -1,6 +1,6 @@
 {{ if not .Site.Params.custom_lightbox }}
     <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js" ></script>
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
 {{ end }}
 
 {{ if not .Site.Params.custom_stylesheets }}
@@ -17,4 +17,4 @@
         customLightbox: {{ .Site.Params.custom_lightbox }}
     };
 </script>
-<script src="/imgur-gallery-plugin.js"></script>
+<script async src="/imgur-gallery-plugin.js"></script>

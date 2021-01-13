@@ -1,10 +1,16 @@
 (function () {
-  const imgurRequest = (albumId) => {
+  const pluginOptions = window.imgurGalleryPlugin;
+
+  if (!pluginOptions) {
+    return;
+  }
+
+  const imgurAlbumRequest = (albumId) => {
     return new Promise((resolve, reject) => {
 
       let request = new XMLHttpRequest();
-      request.open('GET', window.imgurPlugin.api.url + albumId, true);
-      request.setRequestHeader('Authorization', `Client-ID ${window.imgurPlugin.api.clientId}`);
+      request.open('GET', pluginOptions.api.url + albumId, true);
+      request.setRequestHeader('Authorization', `Client-ID ${pluginOptions.api.clientId}`);
       request.onload = () => {
 
         try {
@@ -21,33 +27,33 @@
     })
   };
 
-  const insertPhoto = (itemBox, title, imageId) => {
-    itemBox.insertAdjacentHTML('beforeend', `
-      <div class=item>
-        <a href="https://i.imgur.com/${image.id}h.jpg" target="_blank" data-caption="${title}">
-          <img src="https://i.imgur.com/${image.id}b.jpg" alt="${title}" />
+  const createPhoto = (title, imageId) => {
+    return `
+      <div class=thumbnail>
+        <a href="https://i.imgur.com/${imageId}h.jpg" target="_blank" data-caption="${title}">
+          <img src="https://i.imgur.com/${imageId}b.jpg" alt="${title}" />
         </a>
       </div>
-    `);
+    `;
   };
 
-  const hideMatureContent = (itemBox, album) => {
+  const hideMatureContent = (thumbnailBox, gallery) => {
     // set the NSFW message
-    let message = album.getAttribute('data-nsfw-message') || 'Mature Content has been hidden.';
-    let link = album.getAttribute('data-nsfw-link') || 'Unhide Content';
+    let message = gallery.getAttribute('data-nsfw-message') || 'Gallery images have been hidden';
+    let link = gallery.getAttribute('data-nsfw-link') || 'Click here to reveal images';
 
     // setup NSFW banner with option for custom message
-    album.insertAdjacentHTML('beforeend', `
+    gallery.insertAdjacentHTML('beforeend', `
       <div class=nsfw-message>
-        <p>${message}.<br><small><b>${link}</b></small></p>
+        <p>${message}<br><small><b>${link}</b></small></p>
       </div>
     `);
 
     // Hide the images
-    itemBox.style.display = 'none';
+    thumbnailBox.style.display = 'none';
 
     // grab the message box
-    let nsfwMessage = album.querySelector('.nsfw-message');
+    let nsfwMessage = gallery.querySelector('.nsfw-message');
 
     // listen for event to show images
     nsfwMessage.addEventListener('click', event => {
@@ -56,110 +62,92 @@
       nsfwMessage.style.display = 'none';
 
       // show images
-      itemBox.style.display = '';
+      thumbnailBox.style.display = '';
     });
   }
 
-  const buildAlbum = (response) => {
-    let albumData = response.data;
+  const buildGallery = (gallery, index, response) => {
+    const albumData = response.data;
+    let thumbnailBox = document.createElement('div');
+    thumbnailBox.className = `thumbnail-box thumbnail-box-${index}`;
 
-    // Setup the Title / Desc
-    if(album.getAttribute('data-title') !== false) {
-      album.insertAdjacentHTML('beforeend', `
-        <h2 class=title>
-          ${albumData.title}
-          <small>(${albumData.images_count})</small>
-        </h2>
+    // Remove loading message
+    gallery.innerHTML = "";
+
+     // Setup the Title / Desc
+    if(gallery.getAttribute('data-title')) {
+      let titleBox = document.createElement('div');
+      titleBox.className = 'title-box';
+
+      titleBox.insertAdjacentHTML('beforeend', `
+        <div class=title>
+          <b>${gallery.getAttribute('data-title-text') || albumData.title}</b>
+          <span class="count">(${albumData.images_count})</span>
+        </div>
       `);
 
-      if(albumData.description) {
-        album.insertAdjacentHTML('beforeend', `
-          <p class=description>${albumData.description}</p>
-        `);
-      }
+      gallery.appendChild(titleBox);
     }
 
-    // create album thumb container
-    const itemBox = document.createElement('div').className = `imgur-item-box imgur-gallery-${i}`;
+    // if empty, stop here
+    if (!albumData.images.length) {
+      return;
+    }
     
     // add album thumbnails to container
     Array.prototype.forEach.call(albumData.images, (image, k) => {
-      insertPhoto(itemBox, (image.description || `${albumData.title} (${k})`), image.id);
+      thumbnailBox.insertAdjacentHTML('beforeend', 
+        createPhoto((image.description || `${albumData.title} (${k})`), image.id)
+      );
     });
   
     // Setup NSFW overlay
-    if(album.getAttribute('data-nsfw')) {
-      hideMatureContent(itemBox, album);
+    if(gallery.getAttribute('data-nsfw')) {
+      hideMatureContent(thumbnailBox, gallery);
     }
 
-    // add thumbnails to album
-    album.appendChild(itemBox);
+    // insert thumbnail box
+    gallery.appendChild(thumbnailBox);
+
+    // init lightbox
+    if (!pluginOptions.customLightbox) {
+      baguetteBox.run(`.thumbnail-box-${index}`);
+    }
   }
 
-  // setup the photo albums
-  const setupAlbums = (imgurPlugin) => {
-    // get all album on the page
-    let albums = document.querySelectorAll('.imgur-album');
+  // inset galleries
+  const insertGalleries = () => {
+    // get all gallery elements on the page
+    const galleries = document.querySelectorAll('.imgur-gallery');
 
     // loop over each album
-    Array.prototype.forEach.call(albums, (album, i) => {
+    Array.prototype.forEach.call(galleries, (gallery, index) => {
 
       // get the album src and ID
-      let albumID = album.getAttribute('data-id');
+      const albumId = gallery.getAttribute('data-id');
 
-      // build album thumbnails
-      imgurRequest(albumID).then(buildAlbum).catch(err => {
+      // add loading message
+      gallery.innerHTML = gallery.getAttribute('data-loading-message') || "Loading...";
+
+      imgurAlbumRequest(albumId)
+        .then(response => buildGallery(gallery, index, response))
+        .catch(error => {
         // Hide album if unable to get data
-        album.style.display = 'none';
+        gallery.style.display = 'none';
         // log the error
-        console.debug(err);
+        console.error(error);
       });
-    });
-  };
-
-  // Setup Photo Captions
-  const setupCaptions = () => {
-    const images = document.querySelectorAll('.imgur-album img.imgur-photo');
-
-    // loop over all photos
-    Array.prototype.forEach.call(images, (image, i) => {
-
-      // check for a caption
-      let caption = image.getAttribute('alt');
-
-      if(caption) {
-        // add caption if present
-        image.insertAdjacentHTML('afterend', `<div class="imgur-photo-caption">${caption}</div>`);
-      }
     });
   };
 
   const ready = fn => {
     if (document.readyState != 'loading'){
-      fn();
+      setTimeout(fn, 10);
     } else {
       document.addEventListener('DOMContentLoaded', fn);
     }
   }
 
   // wait for DOM to be loaded before running
-  ready(() => {
-    const imgurPlugin = window.imgurPlugin;
-
-    if (!imgurPlugin) {
-      return;
-    }
-
-    setupAlbums(imgurPlugin);
-    setupCaptions(imgurPlugin);
-
-    // init the lightbox(s)
-    if (!imgurPlugin.customLightbox) {
-      const albums = document.body.querySelectorAll('.imgur-item-box');
-      Array.prototype.forEach.call(albums, (album, i) => {
-        baguetteBox.run(`.imgur-gallery-${i}`);
-      })
-    }
-  });
-
+  ready(insertGalleries);
 }) ();

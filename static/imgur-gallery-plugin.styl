@@ -1,3 +1,4 @@
+font-size-base = 16px
 screen-mobile = 480px
 screen-tablet-min = 768px
 screen-desktop-min = 1060px
@@ -18,97 +19,82 @@ bp($point)
     @media $point
       {block}
 
-.imgur-gallery-plugin {
+.imgur-gallery {
+    width: 100%
+    float: left
+    margin-top: 25px
+    margin-bottom: 35px
+    border: 1px dashed #ddd
+    border-radius: 5px;
 
-    .caption {
-        color: #555
-        font-size: 1.3rem
-        text-align: center
-        margin-top: 10px
-        margin-bottom: 0
+    .title-box {
+        .title {
+            margin: 10px
+            font-size: 1.2rem
+            text-align: center
+            line-height: 1.1
+
+            .count {
+                font-size: 80%
+                color: #777
+            }
+        }
     }
 
-    img {
-        max-width: 100%
-        //width: 120%
-        display: block
-        border-radius: 15px
-    }
-
-    .imgur-album {
+    .thumbnail-box {
         width: 100%
         float: left
-        margin-top: 25px
-        margin-bottom: 35px
-        // border-top: 1px dashed #ddd
-        // border-bottom: 1px dashed #ddd
+        position: relative
+    }
 
-        // .title {
-        //   margin: 0 0 10px
-        //   font-size: 2.2rem
-        //   text-align: center
-        //   line-height: 1.1
+    .nsfw-message {
+        width: 100%
+        background-color: #2f4463a1
+        color: #fff
+        font-size: 1.1rem
+        padding: 25px 15px
+        float: left
+        text-align: center
+        line-height: 1.4
+        cursor: pointer
+        margin-bottom: 0
+        border-radius: 8px
+        border: 5px #fff solid
 
-        //   small {
-        //     font-size: 60%
-        //     color: #777
-        //   }
-        // }
+        p {
+            margin: 0;
+        }
+    }
 
-        // .description {
-        //   margin: 0 0 15px
-        //   font-size: 1.3rem
-        //   text-align: center
-        //   line-height: 1.1
-        //   font-family: heading-font
-        //   color: #555
-        // }
+    .thumbnail {
+        float: left
+        padding: 10px
+        width: 50%
+        transition: opacity;
 
-        .item-box {
-            width: 100%
-            float: left
-            position: relative
+        &:hover {
+            opacity: 0.75
         }
 
-        .nsfw-message {
-            width: 100%
-            background-color: rgb(214, 80, 80)
-            color: #fff
-            font-family: "Open Sans",serif
-            font-size: 1.4rem
-            padding: 15px
-            float: left
-            text-align: center
-            line-height: 1.4
-            cursor: pointer
-            margin-bottom: 8px
-            border-radius: 15px
+        +bp(tablet) {
+            width: 25%
         }
 
-        .item {
-            float: left
-            padding: 10px
-            width: 50%
+        +bp(desktop) {
+            width: 20%
+        }
 
-            +bp(tablet) {
-                width: 25%
+        a {
+            display: block
+
+            &:after {
+                display: none
             }
+        }
 
-            +bp(desktop) {
-                width: 20%
-            }
-
-            a {
-                display: block
-
-                &:after {
-                    display: none
-                }
-            }
-
-            img {
-                border-radius: 10px
-            }
+        img {
+            border-radius: 5px
+            margin: 0 auto;
         }
     }
 }
