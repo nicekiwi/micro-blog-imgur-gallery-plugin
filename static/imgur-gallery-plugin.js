@@ -72,7 +72,7 @@
     thumbnailBox.className = `thumbnail-box thumbnail-box-${index}`;
 
     // Remove loading message
-    gallery.innerHTML = "";
+    gallery.querySelector('.loading-message').remove();
 
      // Setup the Title / Desc
     if(gallery.getAttribute('data-title')) {
@@ -81,7 +81,7 @@
 
       titleBox.insertAdjacentHTML('beforeend', `
         <div class=title>
-          <b>${gallery.getAttribute('data-title-text') || albumData.title}</b>
+          <b>${gallery.getAttribute('data-title-text') || albumData.title || 'Photo Gallery'}</b>
           <span class="count">(${albumData.images_count})</span>
         </div>
       `);
@@ -95,7 +95,7 @@
     }
     
     // add album thumbnails to container
-    Array.prototype.forEach.call(albumData.images, (image, k) => {
+    albumData.images.forEach((image, k) => {
       thumbnailBox.insertAdjacentHTML('beforeend', 
         createPhoto((image.description || `${albumData.title} (${k})`), image.id)
       );
@@ -121,13 +121,13 @@
     const galleries = document.querySelectorAll('.imgur-gallery');
 
     // loop over each album
-    Array.prototype.forEach.call(galleries, (gallery, index) => {
+    galleries.forEach((gallery, index) => {
 
       // get the album src and ID
       const albumId = gallery.getAttribute('data-id');
 
       // add loading message
-      gallery.innerHTML = gallery.getAttribute('data-loading-message') || "Loading...";
+      gallery.innerHTML = `<div class="loading-message">${gallery.getAttribute('data-loading-message') || "Loading..."}</div>`;
 
       imgurAlbumRequest(albumId)
         .then(response => buildGallery(gallery, index, response))

@@ -4,7 +4,7 @@
 {{ end }}
 
 {{ if not .Site.Params.custom_stylesheets }}
-    <link type="text/css" rel="stylesheet" href="/imgur-gallery-plugin.css" />
+    <link type="text/css" rel="stylesheet" href="/imgur-gallery-plugin.min.css" />
 {{ end }}
 
 <script>
@@ -13,8 +13,8 @@
             clientId: "{{ .Site.Params.imgur_client_id }}",
             url: "https://api.imgur.com/3/album/"
         },
-        customStylesheet: {{ .Site.Params.custom_stylesheets }},
+        customStylesheet: {{ .Site.Params.custom_stylesheet }},
         customLightbox: {{ .Site.Params.custom_lightbox }}
     };
 </script>
-<script async src="/imgur-gallery-plugin.js"></script>
+<script async src="/imgur-gallery-plugin.min.js"></script>

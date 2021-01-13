@@ -6,6 +6,11 @@
   border: 1px dashed #ddd;
   border-radius: 5px;
 }
+.imgur-gallery .loading-message {
+  text-align: center;
+  width: 100%;
+  padding: 15px;
+}
 .imgur-gallery .title-box .title {
   margin: 10px;
   font-size: 1.2rem;
