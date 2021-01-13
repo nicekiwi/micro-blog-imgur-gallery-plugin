@@ -2,14 +2,14 @@
 
 Built as a plugin for micro.blog blogs.
 
-Pulls in albums from Imgur on the fly via it's API and displays them as thumbnails with a lighbox popup. 
+Pulls in albums from Imgur on the fly via it's API and displays them as thumbnails with a lighbox popup.  
 
 ## Features
 
 - Thumbnail gallery
 - Simple lightbox
 - Caption support
-- Option to hide/unhide NFSW content
+- Option to hide NFSW content
 - Supports custom lightbox
 - Supports custom CSS
 
@@ -24,6 +24,13 @@ Include the following snippet in a post.
 ```
 <div class="imgur-gallery" data-id="abcde"></div>
 ```
+
+## Example
+
+`<div class="imgur-gallery" data-id="Udrxm" data-title="true"></div>`  
+
+<img src="./screenshot.png" alt="Screenshot of Gallery" />
+
 
 ### Required Attributes
 
@@ -46,5 +53,9 @@ data-nsfw-message="NFSW Content is hidden." // Specify a custom NSFW message
 ---
 data-nsfw-link="Click here to reveal content" // Specify custom link text to reveal the photos
 ```
+
+## Screenshot
+
+<img src="./screenshot.png" alt="Screenshot of Gallery" />
 
 Enjoy! :)
