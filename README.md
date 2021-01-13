@@ -57,4 +57,9 @@ data-nsfw-message="NFSW Content is hidden." // Specify a custom NSFW message
 data-nsfw-link="Click here to reveal content" // Specify custom link text to reveal the photos
 ```
 
+### Roadmap
+
+- Use Hugo Shortcodes instead of HTML
+- Get the Plugin into the Micro.Blog plugins list.
+
 Enjoy! :)
