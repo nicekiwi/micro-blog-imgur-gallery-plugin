@@ -12,6 +12,7 @@ Pulls in albums from Imgur on the fly via it's API and displays them as thumbnai
 - Option to hide NFSW content
 - Supports custom lightbox
 - Supports custom CSS
+- Mobile/touch friendly
 
 And best of all you can use multiple galleries on the same page.
 
